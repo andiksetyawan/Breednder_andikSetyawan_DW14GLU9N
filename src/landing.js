@@ -4,17 +4,21 @@ import {
   Container,
   AppBar,
   Toolbar,
-  Button,
+  //Button,
   Typography,
-  Link
+  //Link
 } from "@material-ui/core";
+
+import Login from './components/login'
+import Register from './components/register'
 
 const styles = theme => ({
   root: {
     textAlign: "center"
   },
   main: {
-    backgroundImage: 'url("/background.jpg")',
+    backgroundImage:
+      'url("/background.jpg")',
     height: "100vh",
     // minHeight: 200,
     backgroundSize: "cover"
@@ -26,7 +30,7 @@ const styles = theme => ({
   appbar: {
     backgroundColor: "transparent",
     boxShadow: "none",
-    textAlign: "left"
+    textAlign:"left"
   },
   footer: {
     // textAlign: "center",
@@ -52,9 +56,10 @@ class Home extends React.Component {
                 <Typography style={{ flexGrow: 1 }} variant="h5">
                   Breednder
                 </Typography>
-                <Button variant="contained" color="secondary">
+                {/* <Button variant="contained" color="secondary">
                   Login
-                </Button>
+                </Button> */}
+                <Login/>
               </Toolbar>
             </Container>
           </AppBar>
@@ -80,14 +85,7 @@ class Home extends React.Component {
               </a>
             </Typography>
             <br />
-            <Button
-              style={{ borderRadius: 20,paddingLeft:50,paddingRight:50 }}
-              size="large"
-              variant="contained"
-              color="secondary"
-            >
-              Register
-            </Button>
+            <Register/>
           </section>
         </div>
         <footer className={classes.footer}>
