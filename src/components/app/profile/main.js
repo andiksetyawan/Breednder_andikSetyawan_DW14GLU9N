@@ -9,7 +9,7 @@ import PersonOutlineRoundedIcon from "@material-ui/icons/PersonOutlineRounded";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import PhoneRoundedIcon from "@material-ui/icons/PhoneRounded";
 
-// import AddPet from "./addpet";
+import AddPet from "./addpet";
 
 const styles = theme => ({});
 
@@ -125,7 +125,7 @@ class Main extends React.Component {
             </div>
           </div>
           <div style={{ position: "fixed", right: 10, top: 30 }}>
-            <Button
+            {/* <Button
               style={{
                 borderRadius: 20
               }}
@@ -133,8 +133,8 @@ class Main extends React.Component {
               color="primary"
             >
               ADD PET
-            </Button>
-            {/* <AddPet/> */}
+            </Button> */}
+            <AddPet/>
           </div>
         </div>
       </div>
