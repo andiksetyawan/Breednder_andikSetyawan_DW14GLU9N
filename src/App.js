@@ -7,7 +7,7 @@ import theme from "./theme";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./home";
-// import Profile from "./profile";
+import Profile from "./profile";
 
 function App() {
   return (
@@ -17,9 +17,9 @@ function App() {
           <Route path="/home">
             <Home />
           </Route>
-          {/* <Route path="/profile">
+          <Route path="/profile">
             <Profile />
-          </Route> */}
+          </Route>
           <Route path="/">
             <Landing />
           </Route>

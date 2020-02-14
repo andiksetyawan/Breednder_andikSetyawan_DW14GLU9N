@@ -18,20 +18,20 @@ class HeaderBar extends React.Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-        {/* <Link to="/profile"> */}
+        <Link to="/profile">
           <Avatar
             className={classes.avatar}
             style={{}}
             alt="Remy Sharp"
             src="https://is4-ssl.mzstatic.com/image/thumb/Purple3/v4/a6/24/fa/a624fa65-6468-c192-1a82-d7ff02e02378/source/256x256bb.jpg"
           />
-        {/* </Link> */}
+        </Link>
         <Typography variant="h6">Garry</Typography>
-        {/* <Link to="/profile"> */}
+        <Link to="/profile">
           <IconButton aria-label="expand" color="inherit" onClick={() => {}}>
             <ExpandMoreIcon />
           </IconButton>
-        {/* </Link> */}
+        </Link>
       </React.Fragment>
     );
   }
