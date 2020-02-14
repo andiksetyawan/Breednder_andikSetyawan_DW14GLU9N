@@ -134,7 +134,7 @@ class Add extends React.Component {
             <Typography variant="subtitle2">Name Per</Typography>
             <TextField
               id="filled-basic"
-              value="Gerry"
+              placeholder="Gerry"
               variant="filled"
               fullWidth
             />
@@ -143,7 +143,7 @@ class Add extends React.Component {
             <Typography variant="subtitle2">Breeder</Typography>
             <TextField
               id="filled-basic"
-              value="Egi Ginting"
+              placeholder="Egi Ginting"
               variant="filled"
               fullWidth
             />
@@ -168,11 +168,11 @@ class Add extends React.Component {
           </div>
           <div style={{ marginBottom: 10 }}>
             <Typography variant="subtitle2">Age</Typography>
-            <TextField id="filled-basic" variant="filled" fullWidth />
+            <TextField id="filled-basic" variant="filled" fullWidth placeholder="5"/>
           </div>
           <div style={{ marginBottom: 10 }}>
             <Typography variant="subtitle2">About</Typography>
-            <TextField id="filled-basic" variant="filled" fullWidth multiline />
+            <TextField id="filled-basic" variant="filled" fullWidth multiline placeholder="Is simply dummy text of the printing and typesetting industry. "/>
           </div>
         </div>
       </>

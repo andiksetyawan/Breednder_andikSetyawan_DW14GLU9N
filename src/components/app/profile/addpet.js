@@ -33,7 +33,7 @@ const styles = theme => ({
 class AddPet extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: false, isAlert: false };
+    this.state = { isOpen: false, isAlert: false, isPremium:false };
   }
 
   render() {
@@ -156,11 +156,11 @@ class AddPet extends React.Component {
             horizontal: "center"
           }}
           open={this.state.isAlert}
-          autoHideDuration={6000}
-          onClose={() => this.setState({ isAlert: false })}
+          //autoHideDuration={6000}
+          onClose={() => this.setState({ isAlert: false, isPremium: true })}
         >
           <Alert
-            onClose={() => this.setState({ isAlert: false })}
+            onClose={() => this.setState({ isAlert: false, isPremium: true })}
             severity="success"
           >
             Terimakasih silahkan tunggu konfirmasi pembayaran
