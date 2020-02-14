@@ -7,13 +7,24 @@ import { withRouter, Link } from "react-router-dom";
 import ArrowBackIosRoundedIcon from "@material-ui/icons/ArrowBackIosRounded";
 
 const styles = () => ({
-  avatard: {
+  avatar: {
     border: "2px solid #fff",
     marginRight: 10
   }
 });
 
 class HeaderBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "Profile Pet"
+    };
+  }
+  changeTitle = val => {
+    this.setState({
+      title: val
+    });
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -24,16 +35,16 @@ class HeaderBar extends React.Component {
           </IconButton>
         </Link>
         <Avatar
-          className={classes.avatard}
+          className={classes.avatar}
           //   style={{ border: "2px solid #fff", marginRight: 10 }}
           alt="Remy Sharp"
           src="https://is4-ssl.mzstatic.com/image/thumb/Purple3/v4/a6/24/fa/a624fa65-6468-c192-1a82-d7ff02e02378/source/256x256bb.jpg"
         />
-        <Typography variant="h6">Profile Pet</Typography>
+        {/* <Typography variant="h6">Profile Pet</Typography> */}
+        <Typography variant="h6">{this.state.title}</Typography>
       </React.Fragment>
     );
   }
 }
 
 export default withRouter(withStyles(styles)(HeaderBar));
-

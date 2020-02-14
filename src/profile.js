@@ -48,7 +48,6 @@ class Profile extends React.Component {
               <HeaderBar/>
             </div>
             <br />
-            
             <div>
               <Navbar/>
             </div>
