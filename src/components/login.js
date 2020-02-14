@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 
 import CloseIcon from "@material-ui/icons/Close";
+import { withRouter } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -44,6 +45,8 @@ class Login extends React.Component {
       email: this.state.email
     };
     localStorage.setItem("user", JSON.stringify(data));
+    //if
+    this.props.history.push("/home");
   };
 
   handleClose = () => {
@@ -52,6 +55,7 @@ class Login extends React.Component {
 
   render() {
     const { classes } = this.props;
+   // let history = useHistory();
     return (
       <div className={classes.root}>
         <Button
@@ -120,4 +124,4 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(styles)(Login);
+export default withRouter(withStyles(styles)(Login));

@@ -16,6 +16,8 @@ import {
 
 import CloseIcon from "@material-ui/icons/Close";
 
+import { withRouter } from "react-router-dom";
+
 const styles = theme => ({
   root: {
     textAlign: "center"
@@ -44,7 +46,7 @@ class Register extends React.Component {
         { id: 4, name: "Sirah" },
         { id: 5, name: "Mewong" }
       ],
-      selectedSpesies: "",
+      selectedSpesies: ""
     };
   }
 
@@ -56,8 +58,14 @@ class Register extends React.Component {
     this.setState({ isopen: false });
   };
 
+  handleLogin = () => {
+    this.props.history.push("/home");
+  };
+
   render() {
     const { classes } = this.props;
+    //let history = useHistory();
+
     return (
       <div className={classes.root}>
         <Button
@@ -179,6 +187,7 @@ class Register extends React.Component {
                 size="large"
                 variant="contained"
                 color="secondary"
+                onClick={this.handleLogin}
               >
                 Register
               </Button>
@@ -190,4 +199,4 @@ class Register extends React.Component {
   }
 }
 
-export default withStyles(styles)(Register);
+export default withRouter(withStyles(styles)(Register));
