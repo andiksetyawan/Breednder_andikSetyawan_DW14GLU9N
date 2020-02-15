@@ -37,6 +37,8 @@ const styles = theme => ({
   }
 });
 
+
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +51,7 @@ class Main extends React.Component {
   }
   render() {
     // const changeTitle = this.props;
-    const { classes } = this.props;
+    const { classes, setTitle } = this.props;
     return (
       <div
         style={{
@@ -103,6 +105,7 @@ class Main extends React.Component {
                   color="secondary"
                   onClick={() => {
                     this.setState({ active: "edit" });
+                    this.props.onTitle("Edit Profile Pet");
                     // this.changeTitle("sadfa");
                   }}
                 >
@@ -117,6 +120,8 @@ class Main extends React.Component {
                   color="secondary"
                   onClick={() => {
                     this.setState({ active: "profile" });
+                    this.props.onTitle("Profile Pet");
+
                     // this.props.changeTitle("dfdf");
                   }}
                 >
@@ -131,6 +136,8 @@ class Main extends React.Component {
                   color="secondary"
                   onClick={() => {
                     this.setState({ active: "profile" });
+                    this.props.onTitle("Profile Pet");
+
                     // this.props.changeTitle("dfdf");
                   }}
                 >
@@ -140,23 +147,27 @@ class Main extends React.Component {
             </div>
           </div>
           <div style={{ position: "fixed", right: 10, top: 30 }}>
-            <Button
+           
+           {this.state.active=="profile" && (<Button
               style={{
                 borderRadius: 20
               }}
               variant="contained"
               color="primary"
               onClick={() => {
+                // this.props.onTitle("edit");
                 if (this.state.isPremium == false) {
                   ///open model
                   this.setState({ isOpen: true });
                 } else {
                   this.setState({ active: "add" });
+                  this.props.onTitle("Add Profile Pet");
+
                 }
               }}
             >
               ADD PET
-            </Button>
+            </Button>) }
 
             <Dialog
               open={this.state.isOpen}

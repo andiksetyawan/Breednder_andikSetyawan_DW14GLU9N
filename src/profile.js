@@ -2,10 +2,9 @@ import React from "react";
 import { withStyles } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 
-import HeaderBar from './components/app/profile/headerbar'
-import Navbar from './components/app/profile/navbar'
-import Main from './components/app/profile/main'
-
+import HeaderBar from "./components/app/profile/headerbar";
+import Navbar from "./components/app/profile/navbar";
+import Main from "./components/app/profile/main";
 
 const styles = theme => ({
   header: {
@@ -28,10 +27,22 @@ const styles = theme => ({
     // "&:before":{
     //     opacity: "0.1"
     // }
-  },
+  }
 });
 
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      navtitle: "Profile Pet"
+    };
+  }
+  
+  changeTitle = (val) => {
+   // alert("wkowwoksss"+val);
+    this.setState({ navtitle: val });
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -45,17 +56,18 @@ class Profile extends React.Component {
             }}
           >
             <div className={classes.header}>
-              <HeaderBar/>
+              {/* <HeaderBar /> */}
+              <HeaderBar title={this.state.navtitle} />
             </div>
             <br />
             <div>
-              <Navbar/>
+              <Navbar />
             </div>
           </div>
         </div>
         <div style={{ flex: 7, height: "100vh", overflow: "auto" }}>
           <div className={classes.main}>
-             <Main/>
+            <Main onTitle={this.changeTitle} />
           </div>
         </div>
       </div>
