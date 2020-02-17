@@ -45,7 +45,7 @@ class Navbar extends React.Component {
 
         <div
           style={{
-            backgroundColor: "#ededed",
+            backgroundColor: "rgb(220, 220, 220)",
             padding: 10,
             borderRadius: 10,
             marginTop: 10
@@ -70,7 +70,7 @@ class Navbar extends React.Component {
 
         <div
           style={{
-            backgroundColor: "#ededed",
+            backgroundColor: "rgb(220, 220, 220)",
             padding: 10,
             //height: 100,
             borderRadius: 10,
@@ -110,9 +110,8 @@ class Navbar extends React.Component {
             </Select>
           </FormControl>
 
-          <div style={{ display: "flex" }}>
-            <div style={{ flexGrow: 1 }}>Spesies</div>
-            {/* <div>10km</div> */}
+          <div style={{ display: "flex",marginTop:15 }}>
+            <div style={{ flexGrow: 1 }}>Gender</div>
           </div>
           <FormControl
             margin="dense"

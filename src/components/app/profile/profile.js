@@ -24,16 +24,16 @@ class Profile extends React.Component {
           alt="avatar"
           src="https://cdn2.thecatapi.com/images/8dh.jpg"
         />
-        <div style={{ padding: 10 }}>
+        <div style={{ padding: 20 }}>
           <div style={{ display: "flex" }}>
             <Typography style={{ flexGrow: 1 }} variant="h5">
               <b>Garry</b>
             </Typography>
-            <Typography color="textSecondary" variant="h6">
+            <Typography color="tex" variant="h6">
               Cat
             </Typography>
           </div>
-          <div style={{ fontSize: 12, color: "gray" }}>
+          <div style={{ fontSize: 12 }}>
             <div style={{ display: "flex", alignItems: "center" }}>
               <div>
                 <PersonOutlineRoundedIcon fontSize="small" />
@@ -61,7 +61,7 @@ class Profile extends React.Component {
           </div>
           <br />
           <Typography variant="h6">About Pet</Typography>
-          <Typography variant="caption" color="textSecondary">
+          <Typography variant="caption" color="">
             Is simply dummy text of the printing and typesetting industry. Lorem
             Ipsum has been the industry's standard dummy text ever since the
             1500s, when an unknown printer took a galley of type and scrambled

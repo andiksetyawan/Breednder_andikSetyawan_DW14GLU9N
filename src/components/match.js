@@ -19,7 +19,7 @@ const styles = theme => ({
       position: "relative",
       textAlign: "center",
       color: "white",
-      height: 150,
+      height: 160,
       width: 125,
       margin: 7,
       backgroundColor: "gray",
@@ -59,7 +59,7 @@ class Match extends React.Component {
             <>
               {item.pets.map((pet, index) => {
                 return (
-                  <div key={index}>
+                  <div key={index} onClick={()=>alert("clicked")} style={{cursor: "pointer"}}>
                     <img src={pet.images[0]} alt={pet.name} />
                     <section>
                       <Typography variant="subtitle2">

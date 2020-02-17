@@ -62,6 +62,7 @@ class Login extends React.Component {
           variant="contained"
           onClick={() => this.setState({ isopen: true })}
           color="secondary"
+          style={{borderRadius:20}}
         >
           Login
         </Button>

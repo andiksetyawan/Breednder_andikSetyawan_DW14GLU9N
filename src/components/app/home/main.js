@@ -9,6 +9,7 @@ import FlashOnRoundedIcon from "@material-ui/icons/FlashOnRounded";
 import FavoriteBorderRoundedIcon from "@material-ui/icons/FavoriteBorderRounded";
 import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
 import CachedRoundedIcon from "@material-ui/icons/CachedRounded";
+import CloseIcon from '@material-ui/icons/Close';
 
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 import ArrowDownwardOutlinedIcon from "@material-ui/icons/ArrowDownwardOutlined";
@@ -55,10 +56,10 @@ class Homex extends React.Component {
             <CachedRoundedIcon />
           </Fab>
 
-          <Fab color="secondary" size="medium" aria-label="scroll back to top">
-            <HighlightOffRoundedIcon />
+          <Fab color="secondary" size="large" aria-label="scroll back to top">
+            <CloseIcon />
           </Fab>
-          <Fab color="secondary" size="medium" aria-label="scroll back to top">
+          <Fab color="secondary" size="large" aria-label="scroll back to top">
             <FavoriteBorderRoundedIcon />
           </Fab>
           <Fab color="secondary" size="small" aria-label="scroll back to top">

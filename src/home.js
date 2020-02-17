@@ -13,17 +13,18 @@ const styles = theme => ({
     alignItems: "center",
     minHeight: 40,
     padding: 10,
-    color: "#fff"
+    color: "#fff",
+    // position:"fixed",
+    // width:"inherit"
   },
 
   main: {
-    //   position: "fixed",
-    backgroundImage: "url('cat_bg.jpg')",
+    backgroundImage: "url('tile.png')",
     height: "100%",
     maxHeight: "100%",
     width: "100%",
     backgroundRepeat: "repeat",
-    backgroundSize: "500px 300px"
+    backgroundSize: "450px 700px"
     // "&:before":{
     //     opacity: "0.1"
     // }

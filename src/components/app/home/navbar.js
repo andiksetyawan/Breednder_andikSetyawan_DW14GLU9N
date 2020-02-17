@@ -13,7 +13,7 @@ class Navbar extends React.Component {
       <React.Fragment>
         <Typography
           style={{
-            margin: "0px 10px"
+            margin: "12px 0px 0px 10px"
           }}
           variant="h6"
         >
