@@ -130,6 +130,78 @@ class Navbar extends React.Component {
             </Select>
           </FormControl>
         </div>
+
+
+        {/* START DUMMY */}
+{/* 
+        <Typography variant="h6">
+          <b>Discovery Setting</b>
+        </Typography>
+
+        <div
+          style={{
+            backgroundColor: "rgb(220, 220, 220)",
+            padding: 10,
+            //height: 100,
+            borderRadius: 10,
+            marginTop: 10
+          }}
+        >
+          <div style={{ display: "flex" }}>
+            <div style={{ flexGrow: 1 }}>Maximum Distance</div>
+            <div>{this.state.distance}km</div>
+          </div>
+          <PrettoSlider
+            onChange={(event,value) => this.setState({distance:value})}
+            max="10"
+            valueLabelDisplay="auto"
+            aria-label="pretto slider"
+            defaultValue={this.state.distance}
+          />
+
+          <div style={{ display: "flex" }}>
+            <div style={{ flexGrow: 1 }}>Age</div>
+           
+          </div>
+          <FormControl
+            margin="dense"
+            variant="filled"
+            style={{ width: "100%" }}
+          >
+            
+            <Select
+              labelId="select-spesies-label"
+              id="select-spesies"
+              value="2"
+              onChange={e => this.setState({ selectedSpesies: e.target.value })}
+            >
+              <MenuItem value="1">1</MenuItem>
+              <MenuItem value="2">2</MenuItem>
+            </Select>
+          </FormControl>
+
+          <div style={{ display: "flex",marginTop:15 }}>
+            <div style={{ flexGrow: 1 }}>Gender</div>
+          </div>
+          <FormControl
+            margin="dense"
+            variant="filled"
+            style={{ width: "100%" }}
+          >
+            <InputLabel id="select-spesies">Spesies Pet</InputLabel>
+            <Select
+              labelId="select-spesies-label"
+              id="select-spesies"
+              value="Male"
+              onChange={e => this.setState({ selectedSpesies: e.target.value })}
+            >
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+            </Select>
+          </FormControl>
+        </div> */}
+
+        {/* END DUMMY */}
         <div style={{ textAlign: "center" }}>
           <Link to="/">
             <Button

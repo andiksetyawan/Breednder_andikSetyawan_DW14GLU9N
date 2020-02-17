@@ -76,7 +76,8 @@ class Main extends React.Component {
               marginTop: 30,
               backgroundColor: "#fff",
               borderRadius: 10,
-              maxHeight: 550,
+              height:"85vh",
+              // maxHeight: 550,
               maxWidth: 350,
               overflow: "auto"
             }}

@@ -6,6 +6,8 @@ import HeaderBar from "./components/app/home/headerbar";
 import Navbar from "./components/app/home/navbar";
 import Main from "./components/app/home/main";
 
+import Typography from '@material-ui/core/Typography'
+
 const styles = theme => ({
   header: {
     backgroundColor: theme.palette.primary.main,
@@ -13,7 +15,7 @@ const styles = theme => ({
     alignItems: "center",
     minHeight: 40,
     padding: 10,
-    color: "#fff",
+    color: "#fff"
     // position:"fixed",
     // width:"inherit"
   },
@@ -36,19 +38,28 @@ class Profile extends React.Component {
     const { classes } = this.props;
     return (
       <div style={{ display: "flex" }}>
-        <div style={{ flex: 3, height: "100vh" }}>
+        <div style={{ flex: 3, height: "100vh", overflow: "hidden" }}>
           <div
             style={{
               maxHeight: "100%",
-              overflowX: "hidden",
-              overflowY: "auto"
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column"
             }}
           >
             <div className={classes.header}>
               <HeaderBar />
             </div>
             <br />
-            <div>
+            <Typography
+              style={{
+                margin: "12px 0px 0px 10px"
+              }}
+              variant="h6"
+            >
+              <b>Match</b>
+            </Typography>
+            <div style={{ overflowY: "auto" }}>
               <Navbar />
             </div>
           </div>

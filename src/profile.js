@@ -36,22 +36,23 @@ class Profile extends React.Component {
       navtitle: "Profile Pet"
     };
   }
-  
-  changeTitle = (val) => {
-   // alert("wkowwoksss"+val);
+
+  changeTitle = val => {
+    // alert("wkowwoksss"+val);
     this.setState({ navtitle: val });
-  }
+  };
 
   render() {
     const { classes } = this.props;
     return (
       <div style={{ display: "flex" }}>
-        <div style={{ flex: 3, height: "100vh" }}>
+        <div style={{ flex: 3, height: "100vh", overflow: "hidden" }}>
           <div
             style={{
               maxHeight: "100%",
-              overflowX: "hidden",
-              overflowY: "auto"
+              overflow: "hidden",
+              display:"flex",
+              flexDirection:"column"
             }}
           >
             <div className={classes.header}>
@@ -59,7 +60,7 @@ class Profile extends React.Component {
               <HeaderBar title={this.state.navtitle} />
             </div>
             <br />
-            <div>
+            <div style={{overflowY:"auto"}}>
               <Navbar />
             </div>
           </div>

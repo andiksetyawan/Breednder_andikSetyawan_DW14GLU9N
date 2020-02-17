@@ -11,14 +11,6 @@ class Navbar extends React.Component {
     // const { classes } = this.props;
     return (
       <React.Fragment>
-        <Typography
-          style={{
-            margin: "12px 0px 0px 10px"
-          }}
-          variant="h6"
-        >
-          <b>Match</b>
-        </Typography>
         <Match />
       </React.Fragment>
     );
