@@ -13,6 +13,9 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { withRouter } from "react-router-dom";
 
+import { connect } from "react-redux";
+import { login } from "../_actions/auth";
+
 const styles = theme => ({
   root: {
     textAlign: "center"
@@ -28,7 +31,7 @@ const styles = theme => ({
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isopen: false, email: "" };
+    this.state = { isopen: false, email: "", password: "" };
   }
 
   componentDidMount() {
@@ -36,17 +39,21 @@ class Login extends React.Component {
   }
 
   handleChange = e => {
-    this.setState({ email: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   handleLogin = () => {
     console.log("login");
     const data = {
-      email: this.state.email
+      email: this.state.email,
+      password: this.state.password
     };
-    localStorage.setItem("user", JSON.stringify(data));
+
+    //localStorage.setItem("user", JSON.stringify(data));
     //if
-    this.props.history.push("/home");
+    //this.props.history.push("/home");
+    console.log(data);
+    this.props.login(data);
   };
 
   handleClose = () => {
@@ -55,14 +62,14 @@ class Login extends React.Component {
 
   render() {
     const { classes } = this.props;
-   // let history = useHistory();
+    // let history = useHistory();
     return (
       <div className={classes.root}>
         <Button
           variant="contained"
           onClick={() => this.setState({ isopen: true })}
           color="secondary"
-          style={{borderRadius:20}}
+          style={{ borderRadius: 20 }}
         >
           Login
         </Button>
@@ -94,6 +101,7 @@ class Login extends React.Component {
                 margin="dense"
                 label="Email"
                 variant="filled"
+                name="email"
                 fullWidth
                 onChange={this.handleChange}
               />
@@ -103,7 +111,9 @@ class Login extends React.Component {
                 margin="dense"
                 label="Password"
                 variant="filled"
+                name="password"
                 fullWidth
+                onChange={this.handleChange}
               />
 
               <Button
@@ -125,4 +135,15 @@ class Login extends React.Component {
   }
 }
 
-export default withRouter(withStyles(styles)(Login));
+const mapStateToProps = state => {};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    login: (data) => dispatch(login(data))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(withStyles(styles)(Login)));
