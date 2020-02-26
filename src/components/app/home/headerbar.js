@@ -27,7 +27,7 @@ class HeaderBar extends React.Component {
           />
         </Link>
         <Typography variant="h6">Garry</Typography>
-        <Link to="/profile">
+        <Link to="/">
           <IconButton aria-label="expand" color="inherit" onClick={() => {}}>
             <ExpandMoreIcon />
           </IconButton>

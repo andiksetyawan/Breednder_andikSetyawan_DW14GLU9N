@@ -2,7 +2,7 @@ const initState = {
   authenticated: false,
   user: null,
   loading: false,
-  error: false
+  error: null
 };
 
 export const auth = (state = initState, action) => {
@@ -28,11 +28,10 @@ export const auth = (state = initState, action) => {
         isError: true
       };
     case "LOGIN_PENDING":
-      console.log("masuk ad ");
-
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: null
       };
     case "LOGIN_FULFILLED":
       console.log("masuk login fullfil");
@@ -40,13 +39,14 @@ export const auth = (state = initState, action) => {
         ...state,
         authenticated: true,
         user: action.payload,
-        loading: false
+        loading: false,
+        error: null
       };
     case "LOGIN_REJECTED":
       return {
         ...state,
         loading: false,
-        error: true
+        error: action.payload.response.data.message
       };
     case "REGISTER_PENDING":
       console.log("masuk ad ");

@@ -9,6 +9,7 @@ import {
   Typography,
   TextField
 } from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
 
 import CloseIcon from "@material-ui/icons/Close";
 import { withRouter } from "react-router-dom";
@@ -63,6 +64,8 @@ class Login extends React.Component {
   render() {
     const { classes } = this.props;
     // let history = useHistory();
+    console.log("dsfs", this.props.auth);
+    const { error, loading } = this.props.auth;
     return (
       <div className={classes.root}>
         <Button
@@ -94,6 +97,7 @@ class Login extends React.Component {
             </IconButton>
           </DialogTitle>
           <DialogContent>
+            {error && <Alert severity="error">{error}</Alert>}
             <form noValidate autoComplete="off">
               <TextField
                 id="email"
@@ -123,9 +127,9 @@ class Login extends React.Component {
                 size="large"
                 variant="contained"
                 color="secondary"
-                onClick={this.handleLogin}
+                onClick={!loading ? this.handleLogin : null}
               >
-                Login
+                {loading ? "Login..." : "Login"}
               </Button>
             </form>
           </DialogContent>
@@ -135,15 +139,19 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = state => {};
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (data) => dispatch(login(data))
+    login: data => dispatch(login(data))
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(withStyles(styles)(Login)));
