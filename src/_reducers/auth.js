@@ -16,9 +16,10 @@ const auth = (state = initState, action) => {
       console.log("payload", action.payload);
       return {
         ...state,
-        // data: [...state.data, ...action.payload],
-        data: action.payload,
-        loading: false
+        authenticated: true,
+        user: action.payload,
+        loading: false,
+        error: null
       };
     case "GET_AUTH_REJECTED":
       console.log("payload", action.payload);
@@ -68,6 +69,15 @@ const auth = (state = initState, action) => {
         ...state,
         loading: false,
         error: action.payload.response.data.message
+      };
+    case "LOGOUT":
+      console.log("logout");
+      return {
+        ...state,
+        authenticated: false,
+        user: null,
+        loading: false,
+        error: null
       };
 
     default:

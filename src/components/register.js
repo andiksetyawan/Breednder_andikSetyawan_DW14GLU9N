@@ -46,7 +46,7 @@ class Register extends React.Component {
     this.state = {
       isopen: false,
       //spesies: [],
-      selectedSpesies: 0,
+      selectedSpesies: "",
       name: "",
       email: "",
       password: "",

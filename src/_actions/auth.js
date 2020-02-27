@@ -1,38 +1,36 @@
 import axios from "axios";
 
-import { API } from "../config/api";
+import { API,setAuthToken } from "../config/api";
 
 export const getAuth = () => {
+  //AUTOAUTH
   // CHECK AUTH TOKEN
   console.log("getusers");
   const token = localStorage.getItem("token");
   if (token) {
     //// cek token from server
+    
+    return {
+      type: "GET_AUTH",
+      payload: async () => {
+        setAuthToken(token);
+        const res = await API.get("/autoauth");
+        console.log("ressss", res.data.data);
+        // localStorage.setItem("token", res.data.data.token);
+        // localStorage.setItem("email", res.data.data.email);
+        // localStorage.setItem("userId", res.data.data.id);
+
+        return res.data.data;
+      }
+    };
   } else {
     ////redirect to login page
-    console.log("no token");
+    // console.log("no token");
+    return {
+      type: "LOGOUT",
+      payload: {}
+    };
   }
-  return {
-    type: "GET_AUTH",
-    payload: async () => {
-      const res = await axios.get("https://jsonplaceholder.typicode.com/users");
-      console.log("ressss", res.data);
-      return res.data;
-    }
-  };
-  //   return dispatch => {
-  //     setTimeout(() => {
-  //       dispatch({
-  //         type: "GET_USERS",
-  //         payload: {}
-  //       });
-  //     }, 3000);
-  //   };
-
-  //   return {
-  //     type: "GET_USERS",
-  //     payload: {}
-  //   };
 };
 
 export const login = data => {
@@ -42,6 +40,10 @@ export const login = data => {
     payload: async () => {
       const res = await API.post("/login", data);
       console.log("ressss", res.data.data);
+      localStorage.setItem("token", res.data.data.token);
+      localStorage.setItem("email", res.data.data.email);
+      localStorage.setItem("userId", res.data.data.id);
+
       return res.data.data;
     }
   };
@@ -54,6 +56,9 @@ export const register = data => {
     payload: async () => {
       const res = await API.post("/register", data);
       console.log("ressss", res.data.data);
+      localStorage.setItem("token", res.data.data.token);
+      localStorage.setItem("email", res.data.data.email);
+      localStorage.setItem("userId", res.data.data.id);
       return res.data.data;
     }
   };
