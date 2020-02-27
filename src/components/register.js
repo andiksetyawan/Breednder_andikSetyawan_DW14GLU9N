@@ -13,10 +13,16 @@ import {
   InputLabel,
   FormControl
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
 import CloseIcon from "@material-ui/icons/Close";
 
 import { withRouter } from "react-router-dom";
+
+import { connect } from "react-redux";
+
+import { getSpecies } from "../_actions/species";
+import { register } from "../_actions/auth";
 
 const styles = theme => ({
   root: {
@@ -39,32 +45,60 @@ class Register extends React.Component {
     super(props);
     this.state = {
       isopen: false,
-      spesies: [
-        { id: 1, name: "Bengal" },
-        { id: 2, name: "Persia" },
-        { id: 3, name: "Ige" },
-        { id: 4, name: "Sirah" },
-        { id: 5, name: "Mewong" }
-      ],
-      selectedSpesies: ""
+      //spesies: [],
+      selectedSpesies: 0,
+      name: "",
+      email: "",
+      password: "",
+      phone: "",
+      address: "",
+      namepet: "",
+      gender: "",
+      species: 0,
+      age: ""
     };
   }
 
-  // componentDidMount(){
-  //   console.log("didmount localstorage");
-  // }
+  componentDidMount() {
+    // console.log("didmount localstorage");
+    //load species
+    this.props.getSpecies();
+  }
 
   handleClose = () => {
     this.setState({ isopen: false });
   };
 
-  handleLogin = () => {
-    this.props.history.push("/home");
+  handleRegister = () => {
+    alert("reg");
+    const data = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      phone: this.state.phone,
+      address: this.state.address,
+      pet: {
+        name: this.state.namepet,
+        gender: this.state.gender,
+        species: this.state.selectedSpesies,
+        age: this.state.age
+      }
+    };
+
+    this.props.register(data);
+  };
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, species, auth } = this.props;
+    const { loading, error } = auth;
     //let history = useHistory();
+
+    console.log("species props erorrrrrr", error);
+    console.log("selected", this.state.selectedSpesies);
 
     return (
       <div className={classes.root}>
@@ -88,6 +122,7 @@ class Register extends React.Component {
             <Typography variant="h3" style={{ textAlign: "center" }}>
               Register
             </Typography>
+            {error && <Alert severity="error">{error}</Alert>}
             <IconButton
               size="small"
               aria-label="close"
@@ -104,43 +139,55 @@ class Register extends React.Component {
                 margin="dense"
                 label="Breeder"
                 variant="filled"
+                name="name"
                 fullWidth
+                onChange={this.handleChange}
               />
               <TextField
                 type="email"
                 margin="dense"
                 label="Email"
                 variant="filled"
+                name="email"
                 fullWidth
+                onChange={this.handleChange}
               />
               <TextField
                 type="password"
                 margin="dense"
                 label="Password"
                 variant="filled"
+                name="password"
                 fullWidth
+                onChange={this.handleChange}
               />
               <TextField
                 type="text"
                 margin="dense"
                 label="Phone Breeder"
                 variant="filled"
+                name="phone"
                 fullWidth
+                onChange={this.handleChange}
               />
               <TextField
                 type="text"
                 margin="dense"
                 label="Address Breeder"
                 variant="filled"
+                name="address"
                 multiline //textarea render
                 fullWidth
+                onChange={this.handleChange}
               />
               <TextField
                 type="text"
                 margin="dense"
                 label="Name Pet"
                 variant="filled"
+                name="namepet"
                 fullWidth
+                onChange={this.handleChange}
               />
 
               <TextField
@@ -148,7 +195,9 @@ class Register extends React.Component {
                 margin="dense"
                 label="Gender Pet"
                 variant="filled"
+                name="gender"
                 fullWidth
+                onChange={this.handleChange}
               />
 
               <FormControl
@@ -165,20 +214,19 @@ class Register extends React.Component {
                     this.setState({ selectedSpesies: e.target.value })
                   }
                 >
-                  {this.state.spesies.map(item => {
-                    return <MenuItem value={item.name}>{item.name}</MenuItem>;
+                  {species.data.map(item => {
+                    return <MenuItem value={item.id}>{item.name}</MenuItem>;
                   })}
-                  {/* <MenuItem value={0}>Male</MenuItem>
-                  <MenuItem value={1}>Female</MenuItem> */}
                 </Select>
               </FormControl>
 
               <TextField
-                type="number"
                 margin="dense"
                 label="Age Pet"
                 variant="filled"
+                name="age"
                 fullWidth
+                onChange={this.handleChange}
               />
 
               <Button
@@ -187,7 +235,7 @@ class Register extends React.Component {
                 size="large"
                 variant="contained"
                 color="secondary"
-                onClick={this.handleLogin}
+                onClick={this.handleRegister}
               >
                 Register
               </Button>
@@ -199,4 +247,21 @@ class Register extends React.Component {
   }
 }
 
-export default withRouter(withStyles(styles)(Register));
+const mapStateToProps = state => {
+  return {
+    species: state.species,
+    auth: state.auth
+  };
+};
+
+const mapDispatchToProps = dispacth => {
+  return {
+    getSpecies: () => dispacth(getSpecies()),
+    register: data => dispacth(register(data))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(withStyles(styles)(Register)));

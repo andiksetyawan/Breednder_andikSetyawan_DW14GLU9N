@@ -6,7 +6,12 @@ import HeaderBar from "./components/app/home/headerbar";
 import Navbar from "./components/app/home/navbar";
 import Main from "./components/app/home/main";
 
-import Typography from '@material-ui/core/Typography'
+import Typography from "@material-ui/core/Typography";
+
+import { connect } from "react-redux";
+
+import { getUsers } from "./_actions/user";
+import { getPets } from "./_actions/pet";
 
 const styles = theme => ({
   header: {
@@ -33,7 +38,12 @@ const styles = theme => ({
   }
 });
 
-class Profile extends React.Component {
+class Home extends React.Component {
+  componentDidMount() {
+    this.props.getUsers(1);
+    this.props.getPets(1);
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -74,4 +84,14 @@ class Profile extends React.Component {
   }
 }
 
-export default withRouter(withStyles(styles)(Profile));
+const mapDispatchToProps = dispatch => {
+  return {
+    getUsers: () => dispatch(getUsers()),
+    getPets: () => dispatch(getPets())
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(withStyles(styles)(Home)));

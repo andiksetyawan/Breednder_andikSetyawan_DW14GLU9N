@@ -46,3 +46,15 @@ export const login = data => {
     }
   };
 };
+
+export const register = data => {
+  console.log("data action register", data);
+  return {
+    type: "REGISTER",
+    payload: async () => {
+      const res = await API.post("/register", data);
+      console.log("ressss", res.data.data);
+      return res.data.data;
+    }
+  };
+};

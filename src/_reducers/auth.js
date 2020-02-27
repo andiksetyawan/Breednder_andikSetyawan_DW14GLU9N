@@ -5,7 +5,7 @@ const initState = {
   error: null
 };
 
-export const auth = (state = initState, action) => {
+const auth = (state = initState, action) => {
   switch (action.type) {
     case "GET_AUTH_PENDING":
       return {
@@ -49,29 +49,30 @@ export const auth = (state = initState, action) => {
         error: action.payload.response.data.message
       };
     case "REGISTER_PENDING":
-      console.log("masuk ad ");
-
       return {
         ...state,
-        isLoading: true
+        loading: true,
+        error: null
       };
     case "REGISTER_FULFILLED":
-      console.log("masuk ad 2");
+      console.log("masuk register fullfil");
       return {
         ...state,
-        data: [...state.data, action.payload],
-        isLoading: false
+        authenticated: true,
+        user: action.payload,
+        loading: false,
+        error: null
       };
     case "REGISTER_REJECTED":
-      console.log("masuk ad 3");
-
-      //  console.log("payload", action.payload);
       return {
         ...state,
-        isLoading: false,
-        isError: true
+        loading: false,
+        error: action.payload.response.data.message
       };
+
     default:
       return state;
   }
 };
+
+export default auth;
