@@ -1,19 +1,30 @@
+import {
+  LOGIN,
+  REGISTER,
+  LOGOUT,
+  GET_AUTH,
+  AUTO_AUTH
+} from "../config/constants";
+
 const initState = {
   authenticated: false,
   user: null,
-  loading: false,
+  loading: true,
   error: null
 };
 
 const auth = (state = initState, action) => {
   switch (action.type) {
-    case "GET_AUTH_PENDING":
+    case `${GET_AUTH}_PENDING`: //AUTOAUTH
+    case `${LOGIN}_PENDING`:
+    case `${REGISTER}_PENDING`:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: null
       };
-    case "GET_AUTH_FULFILLED":
-      console.log("payload", action.payload);
+    case `${GET_AUTH}_FULFILLED`:
+      console.log("GET AUT FULL", action.payload);
       return {
         ...state,
         authenticated: true,
@@ -21,20 +32,20 @@ const auth = (state = initState, action) => {
         loading: false,
         error: null
       };
-    case "GET_AUTH_REJECTED":
-      console.log("payload", action.payload);
+    case `${GET_AUTH}_REJECTED`:
+    case `${LOGIN}_REJECTED`:
+    case `${REGISTER}_REJECTED`:
+      //console.log("payload", action.payload);
       return {
         ...state,
         loading: false,
-        isError: true
+        error:
+          action.payload.response.data.message ||
+          "something error, please relogin"
       };
-    case "LOGIN_PENDING":
-      return {
-        ...state,
-        loading: true,
-        error: null
-      };
-    case "LOGIN_FULFILLED":
+
+    case `${LOGIN}_FULFILLED`:
+    case `${REGISTER}_FULFILLED`:
       console.log("masuk login fullfil");
       return {
         ...state,
@@ -43,39 +54,21 @@ const auth = (state = initState, action) => {
         loading: false,
         error: null
       };
-    case "LOGIN_REJECTED":
-      return {
-        ...state,
-        loading: false,
-        error: action.payload.response.data.message
-      };
-    case "REGISTER_PENDING":
-      return {
-        ...state,
-        loading: true,
-        error: null
-      };
-    case "REGISTER_FULFILLED":
-      console.log("masuk register fullfil");
-      return {
-        ...state,
-        authenticated: true,
-        user: action.payload,
-        loading: false,
-        error: null
-      };
-    case "REGISTER_REJECTED":
-      return {
-        ...state,
-        loading: false,
-        error: action.payload.response.data.message
-      };
-    case "LOGOUT":
+    case `${LOGOUT}`:
       console.log("logout");
       return {
         ...state,
         authenticated: false,
         user: null,
+        loading: false,
+        error: null
+      };
+    case `${AUTO_AUTH}`:
+      console.log("GET AUT AUTOAUTH", action.payload);
+      return {
+        ...state,
+        authenticated: true,
+        user: action.payload,
         loading: false,
         error: null
       };

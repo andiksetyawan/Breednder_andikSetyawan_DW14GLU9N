@@ -3,14 +3,11 @@ import { withStyles } from "@material-ui/core";
 
 import { withRouter } from "react-router-dom";
 
-
 import { Typography, Button } from "@material-ui/core";
-
 
 import PersonOutlineRoundedIcon from "@material-ui/icons/PersonOutlineRounded";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import PhoneRoundedIcon from "@material-ui/icons/PhoneRounded";
-
 
 const styles = theme => ({});
 
@@ -22,15 +19,15 @@ class Profile extends React.Component {
         <img
           style={{ width: "100%" }}
           alt="avatar"
-          src="https://cdn2.thecatapi.com/images/8dh.jpg"
+          src={this.props.pet.currentPet.photo}
         />
         <div style={{ padding: 20 }}>
           <div style={{ display: "flex" }}>
             <Typography style={{ flexGrow: 1 }} variant="h5">
-              <b>Garry</b>
+              <b>{this.props.pet.currentPet.name}</b>
             </Typography>
             <Typography color="tex" variant="h6">
-              Cat
+              {this.props.pet.currentPet.species.name}
             </Typography>
           </div>
           <div style={{ fontSize: 12 }}>
@@ -38,7 +35,7 @@ class Profile extends React.Component {
               <div>
                 <PersonOutlineRoundedIcon fontSize="small" />
               </div>
-              <div>Breeder : Egi Ginting</div>
+              <div>Breeder : {this.props.pet.currentPet.user.name}</div>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
               <div>
@@ -50,27 +47,19 @@ class Profile extends React.Component {
               <div>
                 <PersonOutlineRoundedIcon fontSize="small" />
               </div>
-              <div>Male - Adult</div>
+              <div>Gender - {this.props.pet.currentPet.gender}</div>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
               <div>
                 <PhoneRoundedIcon fontSize="small" />
               </div>
-              <div>Phone Breeder : 081234567890</div>
+              <div>Phone Breeder : {this.props.pet.currentPet.user.phone}</div>
             </div>
           </div>
           <br />
           <Typography variant="h6">About Pet</Typography>
           <Typography variant="caption" color="">
-            Is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the
-            1500s, when an unknown printer took a galley of type and scrambled
-            it to make a type specimen book. It has survived not only five
-            centuries, but also the leap into electronic typesetting, remaining
-            essentially unchanged. It was popularised in the 1960s with the
-            release of Letraset sheets containing Lorem Ipsum passages, and more
-            recently with desktop publishing software like Aldus PageMaker
-            including versions of Lorem Ipsum.
+            {this.props.pet.currentPet.about_pet}
           </Typography>
         </div>
       </React.Fragment>

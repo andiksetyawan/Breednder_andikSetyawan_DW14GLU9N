@@ -6,6 +6,11 @@ import HeaderBar from "./components/app/profile/headerbar";
 import Navbar from "./components/app/profile/navbar";
 import Main from "./components/app/profile/main";
 
+//import {} from "./_actions/auth"
+import { connect } from "react-redux";
+
+//import { Redirect } from "react-router-dom";
+
 const styles = theme => ({
   header: {
     backgroundColor: theme.palette.primary.main,
@@ -43,7 +48,9 @@ class Profile extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, pet, auth, user } = this.props;
+    console.log("pet profile", pet);
+    //if (this.props.auth.authenticated) return <Redirect to="/" />;
     return (
       <div style={{ display: "flex" }}>
         <div style={{ flex: 3, height: "100vh", overflow: "hidden" }}>
@@ -51,23 +58,23 @@ class Profile extends React.Component {
             style={{
               maxHeight: "100%",
               overflow: "hidden",
-              display:"flex",
-              flexDirection:"column"
+              display: "flex",
+              flexDirection: "column"
             }}
           >
             <div className={classes.header}>
               {/* <HeaderBar /> */}
-              <HeaderBar title={this.state.navtitle} />
+              <HeaderBar pet={pet} title={this.state.navtitle} />
             </div>
             <br />
-            <div style={{overflowY:"auto"}}>
-              <Navbar />
+            <div style={{ overflowY: "auto" }}>
+              <Navbar user={user} pet={pet} />
             </div>
           </div>
         </div>
         <div style={{ flex: 7, height: "100vh", overflow: "auto" }}>
           <div className={classes.main}>
-            <Main onTitle={this.changeTitle} />
+            <Main user={user} pet={pet} onTitle={this.changeTitle} />
           </div>
         </div>
       </div>
@@ -75,4 +82,14 @@ class Profile extends React.Component {
   }
 }
 
-export default withRouter(withStyles(styles)(Profile));
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    pet: state.pet,
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(
+  withRouter(withStyles(styles)(Profile))
+);

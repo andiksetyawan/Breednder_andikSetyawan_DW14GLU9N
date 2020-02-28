@@ -49,10 +49,6 @@ class Login extends React.Component {
       email: this.state.email,
       password: this.state.password
     };
-
-    //localStorage.setItem("user", JSON.stringify(data));
-    //if
-    //this.props.history.push("/home");
     console.log(data);
     this.props.login(data);
   };
@@ -64,7 +60,7 @@ class Login extends React.Component {
   render() {
     const { classes } = this.props;
     // let history = useHistory();
-    console.log("dsfs", this.props.auth);
+    //console.log("dsfs", this.props.auth);
     const { error, loading } = this.props.auth;
     return (
       <div className={classes.root}>

@@ -25,7 +25,7 @@ const initState = {
       return {
         ...state,
         loading: false,
-        error: action.payload.response.data.message
+        error: "something error"
       };
     default:
       return state;

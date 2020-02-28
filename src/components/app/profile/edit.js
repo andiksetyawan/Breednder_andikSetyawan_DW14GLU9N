@@ -124,7 +124,7 @@ class Edit extends React.Component {
         </div>
         <div style={{ padding: 15 }}>
           <div style={{ marginBottom: 10 }}>
-            <Typography variant="subtitle2">Name Per</Typography>
+            <Typography variant="subtitle2">Name Pet</Typography>
             <TextField
               id="filled-basic"
               value="Gerry"

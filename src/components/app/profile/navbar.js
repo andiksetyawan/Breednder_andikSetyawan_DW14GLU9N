@@ -15,6 +15,9 @@ import { withRouter } from "react-router-dom";
 
 import PrettoSlider from "../../slider";
 
+import { connect } from "react-redux";
+import { logout } from "../../../_actions/auth";
+
 const styles = theme => ({});
 
 class Navbar extends React.Component {
@@ -32,7 +35,8 @@ class Navbar extends React.Component {
   };
 
   handleLogout = e => {
-    this.props.history.push("/");
+    // this.props.history.push("/");
+    this.props.logout();
   };
 
   render() {
@@ -53,13 +57,13 @@ class Navbar extends React.Component {
         >
           <div style={{ display: "flex", margin: 10 }}>
             <div style={{ flexGrow: 1 }}>Email</div>
-            <div>egi.ginting@gmail.com</div>
+            <div>{this.props.user.data.email}</div>
           </div>
 
           <Divider />
           <div style={{ display: "flex", margin: 10 }}>
             <div style={{ flexGrow: 1 }}>Phone</div>
-            <div>081234567890</div>
+            <div>{this.props.user.data.phone}</div>
           </div>
         </div>
         <br />
@@ -82,7 +86,7 @@ class Navbar extends React.Component {
             <div>{this.state.distance}km</div>
           </div>
           <PrettoSlider
-            onChange={(event,value) => this.setState({distance:value})}
+            onChange={(event, value) => this.setState({ distance: value })}
             max="10"
             valueLabelDisplay="auto"
             aria-label="pretto slider"
@@ -110,7 +114,7 @@ class Navbar extends React.Component {
             </Select>
           </FormControl>
 
-          <div style={{ display: "flex",marginTop:15 }}>
+          <div style={{ display: "flex", marginTop: 15 }}>
             <div style={{ flexGrow: 1 }}>Gender</div>
           </div>
           <FormControl
@@ -131,76 +135,6 @@ class Navbar extends React.Component {
           </FormControl>
         </div>
 
-
-        {/* START DUMMY */}
-{/* 
-        <Typography variant="h6">
-          <b>Discovery Setting</b>
-        </Typography>
-
-        <div
-          style={{
-            backgroundColor: "rgb(220, 220, 220)",
-            padding: 10,
-            //height: 100,
-            borderRadius: 10,
-            marginTop: 10
-          }}
-        >
-          <div style={{ display: "flex" }}>
-            <div style={{ flexGrow: 1 }}>Maximum Distance</div>
-            <div>{this.state.distance}km</div>
-          </div>
-          <PrettoSlider
-            onChange={(event,value) => this.setState({distance:value})}
-            max="10"
-            valueLabelDisplay="auto"
-            aria-label="pretto slider"
-            defaultValue={this.state.distance}
-          />
-
-          <div style={{ display: "flex" }}>
-            <div style={{ flexGrow: 1 }}>Age</div>
-           
-          </div>
-          <FormControl
-            margin="dense"
-            variant="filled"
-            style={{ width: "100%" }}
-          >
-            
-            <Select
-              labelId="select-spesies-label"
-              id="select-spesies"
-              value="2"
-              onChange={e => this.setState({ selectedSpesies: e.target.value })}
-            >
-              <MenuItem value="1">1</MenuItem>
-              <MenuItem value="2">2</MenuItem>
-            </Select>
-          </FormControl>
-
-          <div style={{ display: "flex",marginTop:15 }}>
-            <div style={{ flexGrow: 1 }}>Gender</div>
-          </div>
-          <FormControl
-            margin="dense"
-            variant="filled"
-            style={{ width: "100%" }}
-          >
-            <InputLabel id="select-spesies">Spesies Pet</InputLabel>
-            <Select
-              labelId="select-spesies-label"
-              id="select-spesies"
-              value="Male"
-              onChange={e => this.setState({ selectedSpesies: e.target.value })}
-            >
-              <MenuItem value="Male">Male</MenuItem>
-              <MenuItem value="Female">Female</MenuItem>
-            </Select>
-          </FormControl>
-        </div> */}
-
         {/* END DUMMY */}
         <div style={{ textAlign: "center" }}>
           <Link to="/">
@@ -219,5 +153,11 @@ class Navbar extends React.Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => {
+  return { logout: () => dispatch(logout()) };
+};
 
-export default withRouter(withStyles(styles)(Navbar));
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(withStyles(styles)(Navbar)));

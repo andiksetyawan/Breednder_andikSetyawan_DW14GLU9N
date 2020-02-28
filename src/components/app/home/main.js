@@ -16,7 +16,8 @@ import ArrowDownwardOutlinedIcon from "@material-ui/icons/ArrowDownwardOutlined"
 import ArrowUpwardRoundedIcon from "@material-ui/icons/ArrowUpwardRounded";
 import ArrowForwardOutlinedIcon from "@material-ui/icons/ArrowForwardOutlined";
 
-import Swiper from "../../swiper/Deck";
+//import Swiper from "../../swiper/Deck";
+import Swiper from "../../swiper";
 
 const styles = theme => ({
   navigate1: {
@@ -49,7 +50,8 @@ class Homex extends React.Component {
         <div
           className={classes.navigate1}
           style={{
-            bottom: 80
+            bottom: 80,
+            textAlign:"center"
           }}
         >
           <Fab color="secondary" size="small" aria-label="scroll back to top">
@@ -70,6 +72,7 @@ class Homex extends React.Component {
           className={classes.navigate2}
           style={{
             bottom: 10,
+            padding:"10px",
             display: "flex",
             justifyContent: "space-between"
             //   background:

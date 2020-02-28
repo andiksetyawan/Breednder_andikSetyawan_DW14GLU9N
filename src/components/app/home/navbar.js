@@ -9,9 +9,11 @@ const styles = theme => ({});
 class Navbar extends React.Component {
   render() {
     // const { classes } = this.props;
+    console.log("macth navbar paretn", this.props.matched);
+
     return (
       <React.Fragment>
-        <Match />
+        <Match matched={this.props.matched} />
       </React.Fragment>
     );
   }

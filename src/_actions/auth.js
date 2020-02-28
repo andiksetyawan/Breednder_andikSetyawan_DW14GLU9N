@@ -1,31 +1,46 @@
 import axios from "axios";
 
-import { API,setAuthToken } from "../config/api";
+import { API, setAuthToken } from "../config/api";
 
 export const getAuth = () => {
   //AUTOAUTH
-  // CHECK AUTH TOKEN
-  console.log("getusers");
   const token = localStorage.getItem("token");
   if (token) {
-    //// cek token from server
-    
     return {
       type: "GET_AUTH",
       payload: async () => {
         setAuthToken(token);
         const res = await API.get("/autoauth");
         console.log("ressss", res.data.data);
-        // localStorage.setItem("token", res.data.data.token);
-        // localStorage.setItem("email", res.data.data.email);
-        // localStorage.setItem("userId", res.data.data.id);
 
         return res.data.data;
       }
     };
   } else {
     ////redirect to login page
-    // console.log("no token");
+    console.log("LOGOUT XXXX");
+    return {
+      type: "LOGOUT",
+      payload: {}
+    };
+  }
+};
+
+export const autoAuth = () => {
+  //AUTOAUTH
+  const token = localStorage.getItem("token");
+  if (token) {
+    return {
+      type: "AUTO_AUTH",
+      payload: {
+        id: 1,
+        token,
+        email: "test@gmail.com"
+      }
+    };
+  } else {
+    ////redirect to login page
+    console.log("LOGOUT XXXX");
     return {
       type: "LOGOUT",
       payload: {}
@@ -39,7 +54,7 @@ export const login = data => {
     type: "LOGIN",
     payload: async () => {
       const res = await API.post("/login", data);
-      console.log("ressss", res.data.data);
+      //  console.log("ressss", res.data.data);
       localStorage.setItem("token", res.data.data.token);
       localStorage.setItem("email", res.data.data.email);
       localStorage.setItem("userId", res.data.data.id);
@@ -61,5 +76,16 @@ export const register = data => {
       localStorage.setItem("userId", res.data.data.id);
       return res.data.data;
     }
+  };
+};
+
+export const logout = () => {
+  console.log("data action LOGOUT");
+  localStorage.removeItem("token");
+  localStorage.removeItem("email");
+  localStorage.removeItem("userId");
+  return {
+    type: "LOGOUT",
+    payload: {}
   };
 };

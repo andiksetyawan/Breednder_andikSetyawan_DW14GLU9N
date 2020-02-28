@@ -3,6 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import breeds from "../data/breeds.json";
 
+import { connect } from "react-redux";
+
 const styles = theme => ({
   root: {
     display: "flex",
@@ -51,30 +53,55 @@ const styles = theme => ({
 
 class Match extends React.Component {
   render() {
-    const { classes } = this.props;
+    const { classes, match, pet } = this.props;
+
     return (
       <div className={classes.root}>
-        {breeds.map((item, i) => {
-          return (
-            <>
-              {item.pets.map((pet, index) => {
-                return (
-                  <div key={index} onClick={()=>alert("clicked")} style={{cursor: "pointer"}}>
-                    <img src={pet.images[0]} alt={pet.name} />
-                    <section>
-                      <Typography variant="subtitle2">
-                        <b>{pet.name}</b>
-                      </Typography>
-                    </section>
-                  </div>
-                );
-              })}
-            </>
-          );
-        })}
+        {match &&
+          match.data.map((item, index) => {
+            if (item.pet.id == pet.currentPet.id) {
+              return (
+                <div
+                  key={index}
+                  onClick={() => alert("clickedx")}
+                  style={{ cursor: "pointer" }}
+                >
+                  <img src={item.pet_liked.photo} alt={item.pet_liked.name} />
+                  <section>
+                    <Typography variant="subtitle2">
+                      <b>{item.pet_liked.name}</b>
+                    </Typography>
+                  </section>
+                </div>
+              );
+            } else {
+              return (
+                <div
+                  key={index}
+                  onClick={() => alert("clickedx")}
+                  style={{ cursor: "pointer" }}
+                >
+                  <img src={item.pet.photo} alt={item.pet.name} />
+                  <section>
+                    <Typography variant="subtitle2">
+                      <b>{item.pet.name}</b>
+                    </Typography>
+                  </section>
+                </div>
+              );
+            }
+          })}
       </div>
     );
   }
 }
 
-export default withStyles(styles)(Match);
+const mapStateToProps = state => {
+  return {
+    pet: state.pet,
+    auth: state.auth,
+    match: state.match
+  };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(Match));

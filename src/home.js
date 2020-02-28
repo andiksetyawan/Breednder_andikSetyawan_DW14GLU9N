@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 
 import { getUsers } from "./_actions/user";
 import { getPets } from "./_actions/pet";
+import { getMatch } from "./_actions/match";
 
 const styles = theme => ({
   header: {
@@ -40,12 +41,24 @@ const styles = theme => ({
 
 class Home extends React.Component {
   componentDidMount() {
-    this.props.getUsers(1);
-    this.props.getPets(1);
+    //console.log("id===========", this.props.auth.user.id);
+    const { user } = this.props.auth;
+    this.props.getUsers(user.id);
+    if (this.props.pet && this.props.pet.data.length == 0) {
+      this.props.getPets(user.id);
+    }
+
+    if (this.props.pet.data.length > 0) {
+    //  console.log("pet home current", this.props.pet.currentPet.id);
+      this.props.getMatch(this.props.pet.currentPet.id);
+    }
+    //const { pet } = this.props.pet;
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, auth, pet, user, matched } = this.props;
+    console.log("xxxxxxxxxxx home", matched);
+
     return (
       <div style={{ display: "flex" }}>
         <div style={{ flex: 3, height: "100vh", overflow: "hidden" }}>
@@ -58,7 +71,7 @@ class Home extends React.Component {
             }}
           >
             <div className={classes.header}>
-              <HeaderBar />
+              <HeaderBar pet={pet} />
             </div>
             <br />
             <Typography
@@ -70,7 +83,7 @@ class Home extends React.Component {
               <b>Match</b>
             </Typography>
             <div style={{ overflowY: "auto" }}>
-              <Navbar />
+              <Navbar matched={matched} />
             </div>
           </div>
         </div>
@@ -84,14 +97,24 @@ class Home extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    user: state.user,
+    pet: state.pet,
+    matched: state.match
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
-    getUsers: () => dispatch(getUsers()),
-    getPets: () => dispatch(getPets())
+    getUsers: id => dispatch(getUsers(id)),
+    getPets: user_id => dispatch(getPets(user_id)),
+    getMatch: pet_id => dispatch(getMatch(pet_id))
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(withStyles(styles)(Home)));

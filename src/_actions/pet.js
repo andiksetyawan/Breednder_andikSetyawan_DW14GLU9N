@@ -1,14 +1,55 @@
-import { API } from "../config/api";
-import { GET_PET } from "../config/constants";
+import { API, setAuthToken } from "../config/api";
+import {
+  GET_PET,
+  ADD_PET,
+  EDIT_PET,
+  SET_CURRENT_PET
+} from "../config/constants";
 
-export const getPets = () => {
+export const getPets = user_id => {
   console.log("masuk get PET actions");
   return {
     type: GET_PET,
     payload: async () => {
-      const res = await API.get("/pets");
-      console.log("ressss Users", res.data.data);
+      const res = await API.get("/pets/user/" + user_id);
+      console.log("ressss data pet by user", res.data.data);
       return res.data.data;
     }
+  };
+};
+
+export const addPet = data => {
+  console.log("masuk ADD PET actions");
+  const token = localStorage.getItem("token");
+  return {
+    type: ADD_PET,
+    payload: async () => {
+      setAuthToken(token);
+      const res = await API.post("/pet", data);
+      //console.log("ressss data pet by user", res.data.data);
+      return res.data.data;
+    }
+  };
+};
+
+export const editPet = (id_pet, data) => {
+  console.log("masuk edit PET actions", id_pet, data);
+  const token = localStorage.getItem("token");
+  return {
+    type: EDIT_PET,
+    payload: async () => {
+      setAuthToken(token);
+      const res = await API.put("/pet/" + id_pet, data);
+      //console.log("ressss data pet by user", res.data.data);
+      return res.data.data;
+    }
+  };
+};
+
+export const setCurrentPet = data => {
+  console.log("masuk setCurrentPet actions", data);
+  return {
+    type: SET_CURRENT_PET,
+    payload: data
   };
 };
