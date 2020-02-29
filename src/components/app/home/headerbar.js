@@ -11,7 +11,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import { connect } from "react-redux";
-import { setCurrentPet } from "../../../_actions/pet";
+import { setPet } from "../../../_actions/pet";
 import { getMatch } from "../../../_actions/match";
 
 const styles = () => ({
@@ -28,8 +28,8 @@ class HeaderBar extends React.Component {
     anchorEl: null
   };
   render() {
-    const { classes, pet } = this.props;
-    //const currentPet = pet.data[0];
+    const { classes, pet, pets } = this.props;
+    //const data = pet.data[0];
     // console.log("current petxxx", pet);
     //console.log("pet header", PageTransitionEvent);
     return (
@@ -39,7 +39,7 @@ class HeaderBar extends React.Component {
             className={classes.avatar}
             style={{}}
             alt="Remy Sharp"
-            src={pet.currentPet.photo}
+            src={pet.data.photo}
           />
         </Link>
         <Button
@@ -48,7 +48,7 @@ class HeaderBar extends React.Component {
           onClick={e => this.setState({ anchorEl: e.currentTarget })}
         >
           <Typography variant="h6" style={{ color: "#fff" }}>
-            {pet.currentPet.name}
+            {pet.data.name}
           </Typography>
           <ExpandMoreIcon style={{ color: "#fff" }} />
         </Button>
@@ -59,15 +59,17 @@ class HeaderBar extends React.Component {
           open={Boolean(this.state.anchorEl)}
           onClose={() => this.setState({ anchorEl: null })}
         >
-          {pet.data.map((item, i) => {
+          {pets.data.map((item, i) => {
             return (
               <MenuItem
                 key={i}
                 onClick={e => {
                   this.setState({ anchorEl: null });
                   console.log("etarget", i);
-                  this.props.setCurrentPet(pet.data[i]);
-                  this.props.getMatch(pet.data[i].id);
+                  // this.props.setdata(pet.data[i]);
+                  console.log("id pet", pets.data[i].id);
+                  this.props.setPet(pets.data[i]);
+                  this.props.getMatch(pets.data[i].id);
                 }}
               >
                 {item.name}
@@ -75,7 +77,7 @@ class HeaderBar extends React.Component {
             );
           })}
         </Menu>
-        {/* <Typography variant="h6">{pet.currentPet.name}</Typography>
+        {/* <Typography variant="h6">{pet.data.name}</Typography>
         <Link to="/">
           <IconButton aria-label="expand" color="inherit" onClick={() => {}}>
             <ExpandMoreIcon />
@@ -88,7 +90,7 @@ class HeaderBar extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setCurrentPet: data => dispatch(setCurrentPet(data)),
+    setPet: data => dispatch(setPet(data)),
     getMatch: pet_id => dispatch(getMatch(pet_id))
   };
 };

@@ -3,15 +3,16 @@ import {
   GET_PET,
   ADD_PET,
   EDIT_PET,
-  SET_CURRENT_PET
+  SET_PET,
+  REMOVE_PET
 } from "../config/constants";
 
-export const getPets = user_id => {
+export const getPet = id => {
   console.log("masuk get PET actions");
   return {
     type: GET_PET,
     payload: async () => {
-      const res = await API.get("/pets/user/" + user_id);
+      const res = await API.get("/pet/" + id);
       console.log("ressss data pet by user", res.data.data);
       return res.data.data;
     }
@@ -40,16 +41,24 @@ export const editPet = (id_pet, data) => {
     payload: async () => {
       setAuthToken(token);
       const res = await API.put("/pet/" + id_pet, data);
-      //console.log("ressss data pet by user", res.data.data);
+      console.log("ressss data pet by user", res.data.data);
       return res.data.data;
     }
   };
 };
 
-export const setCurrentPet = data => {
+export const setPet = data => {
   console.log("masuk setCurrentPet actions", data);
   return {
-    type: SET_CURRENT_PET,
+    type: SET_PET,
     payload: data
+  };
+};
+
+export const removePet = () => {
+  console.log("masuk removePet actions");
+  return {
+    type: REMOVE_PET,
+    payload: {}
   };
 };

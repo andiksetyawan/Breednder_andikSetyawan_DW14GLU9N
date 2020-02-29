@@ -19,15 +19,15 @@ class Profile extends React.Component {
         <img
           style={{ width: "100%" }}
           alt="avatar"
-          src={this.props.pet.currentPet.photo}
+          src={this.props.pet.data.photo}
         />
         <div style={{ padding: 20 }}>
           <div style={{ display: "flex" }}>
             <Typography style={{ flexGrow: 1 }} variant="h5">
-              <b>{this.props.pet.currentPet.name}</b>
+              <b>{this.props.pet.data.name}</b>
             </Typography>
             <Typography color="tex" variant="h6">
-              {this.props.pet.currentPet.species.name}
+              {this.props.pet.data.species.name}
             </Typography>
           </div>
           <div style={{ fontSize: 12 }}>
@@ -35,7 +35,7 @@ class Profile extends React.Component {
               <div>
                 <PersonOutlineRoundedIcon fontSize="small" />
               </div>
-              <div>Breeder : {this.props.pet.currentPet.user.name}</div>
+              <div>Breeder : {this.props.pet.data.user.name}</div>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
               <div>
@@ -47,19 +47,19 @@ class Profile extends React.Component {
               <div>
                 <PersonOutlineRoundedIcon fontSize="small" />
               </div>
-              <div>Gender - {this.props.pet.currentPet.gender}</div>
+              <div>Gender - {this.props.pet.data.gender}</div>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
               <div>
                 <PhoneRoundedIcon fontSize="small" />
               </div>
-              <div>Phone Breeder : {this.props.pet.currentPet.user.phone}</div>
+              <div>Phone Breeder : {this.props.pet.data.user.phone}</div>
             </div>
           </div>
           <br />
           <Typography variant="h6">About Pet</Typography>
           <Typography variant="caption" color="">
-            {this.props.pet.currentPet.about_pet}
+            {this.props.pet.data.about_pet}
           </Typography>
         </div>
       </React.Fragment>

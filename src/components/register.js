@@ -190,7 +190,7 @@ class Register extends React.Component {
                 onChange={this.handleChange}
               />
 
-              <TextField
+              {/* <TextField
                 type="text"
                 margin="dense"
                 label="Gender Pet"
@@ -198,7 +198,40 @@ class Register extends React.Component {
                 name="gender"
                 fullWidth
                 onChange={this.handleChange}
-              />
+              /> */}
+              <div style={{ margin: "10px 0" }}>
+                {/* <Typography variant="subtitle2">Gender</Typography> */}
+                <FormControl variant="filled" style={{ width: "100%" }}>
+                  <InputLabel id="demo-simple-select-filled-label-gender">
+                    Gender
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-filled-label-gender"
+                    id="demo-simple-select-filled-gender"
+                    value={this.state.gender}
+                    onChange={e => this.setState({ gender: e.target.value })}
+                  >
+                    <MenuItem value={"male"}>Male</MenuItem>
+                    <MenuItem value={"female"}>Female</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              <div style={{ margin: "10px 0" }}>
+                <FormControl variant="filled" style={{ width: "100%" }}>
+                  <InputLabel id="demo-simple-select-filled-label">
+                    Age
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+                    value={this.state.age}
+                    onChange={e => this.setState({ age: e.target.value })}
+                  >
+                    <MenuItem value={"child"}>Child</MenuItem>
+                    <MenuItem value={"adult"}>Adult</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
 
               <FormControl
                 margin="dense"
@@ -220,14 +253,14 @@ class Register extends React.Component {
                 </Select>
               </FormControl>
 
-              <TextField
+              {/* <TextField
                 margin="dense"
                 label="Age Pet"
                 variant="filled"
                 name="age"
                 fullWidth
                 onChange={this.handleChange}
-              />
+              /> */}
 
               <Button
                 style={{ borderRadius: 20, margin: "20px 0" }}

@@ -33,6 +33,7 @@ import Profile from "./profile";
 
 import { connect } from "react-redux";
 import { addPet, editPet } from "../../../_actions/pet";
+import { addPayment } from "../../../_actions/payment";
 
 const styles = theme => ({
   closeButton: {
@@ -108,12 +109,13 @@ class Main extends React.Component {
       age: "adult",
       species: "",
       name_pet: "",
-      about_pet: this.props.pet.currentPet.about_pet,
-      gender_edit: this.props.pet.currentPet.gender,
-      age_edit: this.props.pet.currentPet.age,
-      species_edit: this.props.pet.currentPet.species.id,
-      name_pet_edit: this.props.pet.currentPet.name,
-      about_pet_edit: this.props.pet.currentPet.about_pet
+      about_pet: this.props.pet.data.about_pet,
+      gender_edit: this.props.pet.data.gender,
+      age_edit: this.props.pet.data.age,
+      species_edit: this.props.pet.data.species.id,
+      name_pet_edit: this.props.pet.data.name,
+      about_pet_edit: this.props.pet.data.about_pet,
+      no_rek: ""
     };
   }
 
@@ -124,7 +126,7 @@ class Main extends React.Component {
   };
   render() {
     // const changeTitle = this.props;
-    const { classes, pet } = this.props;
+    const { classes, pet, payment } = this.props;
     return (
       <div
         style={{
@@ -540,7 +542,7 @@ class Main extends React.Component {
                       //photo
                     };
 
-                    this.props.editPet(pet.currentPet.id, data_edit_pet);
+                    this.props.editPet(pet.data.id, data_edit_pet);
 
                     this.setState({ active: "profile" });
                     this.props.onTitle("Profile Pet");
@@ -593,9 +595,13 @@ class Main extends React.Component {
                 color="primary"
                 onClick={() => {
                   // this.props.onTitle("edit");
-                  if (this.state.isPremium == false) {
+                  if (payment.data.status === "free") {
                     ///open model
-                    this.setState({ isOpen: true });
+                    if(!payment.data.proof_of_transfer){
+                      this.setState({ isOpen: true });
+                    }else{
+                      this.setState({ isAlert: true})
+                    }
                   } else {
                     this.setState({ active: "add" });
                     this.props.onTitle("Add Profile Pet");
@@ -644,6 +650,8 @@ class Main extends React.Component {
                     placeholder="No. Rek Kamu"
                     fullWidth
                     style={{ margin: "20px 0 20px 0" }}
+                    name="no_rek"
+                    onChange={this.handleChange}
                   />
 
                   <div>
@@ -691,6 +699,12 @@ class Main extends React.Component {
 
                   <Button
                     onClick={() => {
+                      //save new payment w/ status free
+                      const data_payment = {
+                        no_rek: this.state.no_rek
+                        // proof_of_transfer: this.state.proof_of_transfer
+                      };
+                      this.props.addPayment(data_payment);
                       this.setState({ isOpen: false, isAlert: true });
                     }}
                     style={{
@@ -721,7 +735,7 @@ class Main extends React.Component {
                 }
                 severity="success"
               >
-                Terimakasih silahkan tunggu konfirmasi pembayaran
+                Terimakasih silahkan tunggu konfirmasi dari admin untuk pembayaran payment status premium anda.
               </Alert>
             </Snackbar>
           </div>
@@ -735,14 +749,16 @@ const mapStateToProps = state => {
   return {
     species: state.species,
     user: state.user,
-    pet: state.pet
+    pet: state.pet,
+    payment: state.payment
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     addPet: data => dispatch(addPet(data)),
-    editPet: (id_pet, data) => dispatch(editPet(id_pet, data))
+    editPet: (id_pet, data) => dispatch(editPet(id_pet, data)),
+    addPayment: data => dispatch(addPayment(data))
   };
 };
 

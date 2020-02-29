@@ -24,7 +24,9 @@ const auth = (state = initState, action) => {
         error: null
       };
     case `${GET_AUTH}_FULFILLED`:
-      console.log("GET AUT FULL", action.payload);
+    case `${LOGIN}_FULFILLED`:
+    case `${REGISTER}_FULFILLED`:
+      //console.log("GET AUT FULL", action.payload);
       return {
         ...state,
         authenticated: true,
@@ -43,17 +45,6 @@ const auth = (state = initState, action) => {
           action.payload.response.data.message ||
           "something error, please relogin"
       };
-
-    case `${LOGIN}_FULFILLED`:
-    case `${REGISTER}_FULFILLED`:
-      console.log("masuk login fullfil");
-      return {
-        ...state,
-        authenticated: true,
-        user: action.payload,
-        loading: false,
-        error: null
-      };
     case `${LOGOUT}`:
       console.log("logout");
       return {
@@ -63,15 +54,15 @@ const auth = (state = initState, action) => {
         loading: false,
         error: null
       };
-    case `${AUTO_AUTH}`:
-      console.log("GET AUT AUTOAUTH", action.payload);
-      return {
-        ...state,
-        authenticated: true,
-        user: action.payload,
-        loading: false,
-        error: null
-      };
+    // case `${AUTO_AUTH}`:
+    //   console.log("GET AUT AUTOAUTH", action.payload);
+    //   return {
+    //     ...state,
+    //     authenticated: true,
+    //     user: action.payload,
+    //     loading: false,
+    //     error: null
+    //   };
 
     default:
       return state;

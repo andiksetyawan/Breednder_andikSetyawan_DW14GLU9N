@@ -4,50 +4,27 @@ import TinderCard from "react-tinder-card";
 import { Typography } from "@material-ui/core";
 
 import { connect } from "react-redux";
+import { getPetsMatch } from "../_actions/pets_match";
 
 import PersonOutlineRoundedIcon from "@material-ui/icons/PersonOutlineRounded";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import PhoneRoundedIcon from "@material-ui/icons/PhoneRounded";
-
-const db = [
-  {
-    name: "Richard Hendricks",
-    url:
-      "https://github.com/3DJakob/react-tinder-card-demo/blob/master/public/img/richard.jpg?raw=true"
-  },
-  {
-    name: "Erlich Bachman",
-    url:
-      "https://raw.githubusercontent.com/3DJakob/react-tinder-card-demo/master/public/img/erlich.jpg"
-  },
-  {
-    name: "Monica Hall",
-    url:
-      "https://github.com/3DJakob/react-tinder-card-demo/blob/master/public/img/monica.jpg?raw=true"
-  },
-  {
-    name: "Jared Dunn",
-    url:
-      "https://raw.githubusercontent.com/3DJakob/react-tinder-card-demo/master/public/img/jared.jpg"
-  },
-  {
-    name: "Dinesh Chugtai",
-    url:
-      "https://raw.githubusercontent.com/3DJakob/react-tinder-card-demo/master/public/img/dinesh.jpg"
-  }
-];
 
 class Swiper extends React.Component {
   state = {
     lastDirection: null
   };
 
-  swiped = (direction, nameToDelete) => {
+  swiped = (direction, id) => {
     // console.log("removing: " + nameToDelete);
     console.log("swipe on  " + direction);
     // setLastDirection(direction);
     if (direction == "left") {
     } else {
+      ////CEK MATCH DATA SUDAH ADA BELUM
+      ////JIKA BELUM ADA CREATE MATCH DGN STATUS FALSE
+      ////JIKA SUDAH ADA UPDATE STATUS TRUE
+      console.log("idpet",id);
     }
     this.setState({
       lastDirection: direction
@@ -59,8 +36,12 @@ class Swiper extends React.Component {
     ////IF CEK INDEX TERAKHIR LOAD ULANG
   };
 
+  componentDidMount() {
+    this.props.getPetsMatch(this.props.pet.data.id);
+  }
+
   render() {
-    const { pet } = this.props;
+    const { pets, pets_match } = this.props;
     return (
       <>
         {/* <div style={{ display: "fixed", top: 0, left: 0 }}>
@@ -79,11 +60,11 @@ class Swiper extends React.Component {
         </div> */}
         <div className="swiper1">
           <div className="cardContainer">
-            {pet.data.map(character => (
+            {pets_match.data.map(character => (
               <TinderCard
                 className="swipe1"
-                key={character.name}
-                onSwipe={dir => this.swiped(dir, character.name)}
+                key={character.id}
+                onSwipe={dir => this.swiped(dir, character.id)}
                 onCardLeftScreen={() => this.outOfFrame(character.name)}
               >
                 <div
@@ -119,8 +100,16 @@ class Swiper extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    pet: state.pet
+    pets: state.pets,
+    pet: state.pet,
+    pets_match: state.pets_match
   };
 };
 
-export default connect(mapStateToProps)(Swiper);
+const mapDispatchToProps = dispatch => {
+  return {
+    getPetsMatch: id => dispatch(getPetsMatch(id))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Swiper);

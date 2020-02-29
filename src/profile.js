@@ -8,6 +8,7 @@ import Main from "./components/app/profile/main";
 
 //import {} from "./_actions/auth"
 import { connect } from "react-redux";
+import { getPayment } from "./_actions/payment";
 
 //import { Redirect } from "react-router-dom";
 
@@ -47,8 +48,12 @@ class Profile extends React.Component {
     this.setState({ navtitle: val });
   };
 
+  componentDidMount() {
+    this.props.getPayment();
+  }
+
   render() {
-    const { classes, pet, auth, user } = this.props;
+    const { classes, pet, pets, auth, user } = this.props;
     console.log("pet profile", pet);
     //if (this.props.auth.authenticated) return <Redirect to="/" />;
     return (
@@ -74,7 +79,7 @@ class Profile extends React.Component {
         </div>
         <div style={{ flex: 7, height: "100vh", overflow: "auto" }}>
           <div className={classes.main}>
-            <Main user={user} pet={pet} onTitle={this.changeTitle} />
+            <Main user={user} onTitle={this.changeTitle} />
           </div>
         </div>
       </div>
@@ -90,6 +95,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(
-  withRouter(withStyles(styles)(Profile))
-);
+const mapDispatchToProps = dispatch => {
+  return {
+    getPayment: () => dispatch(getPayment())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(withStyles(styles)(Profile)));

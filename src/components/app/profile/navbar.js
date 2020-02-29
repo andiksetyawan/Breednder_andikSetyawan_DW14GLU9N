@@ -17,6 +17,8 @@ import PrettoSlider from "../../slider";
 
 import { connect } from "react-redux";
 import { logout } from "../../../_actions/auth";
+import { removePet } from "../../../_actions/pet";
+import { resetPayment } from "../../../_actions/payment";
 
 const styles = theme => ({});
 
@@ -154,7 +156,13 @@ class Navbar extends React.Component {
   }
 }
 const mapDispatchToProps = dispatch => {
-  return { logout: () => dispatch(logout()) };
+  return {
+    logout: () => {
+      dispatch(removePet()); //resetPet
+      dispatch(resetPayment());
+      dispatch(logout());
+    }
+  };
 };
 
 export default connect(

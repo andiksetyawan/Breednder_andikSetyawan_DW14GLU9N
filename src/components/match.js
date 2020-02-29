@@ -53,13 +53,14 @@ const styles = theme => ({
 
 class Match extends React.Component {
   render() {
-    const { classes, match, pet } = this.props;
+    const { classes, match, pet, pets } = this.props;
 
     return (
       <div className={classes.root}>
         {match &&
           match.data.map((item, index) => {
-            if (item.pet.id == pet.currentPet.id) {
+            console.log("---",item.pet.id ,"===", pet.data.id)
+            if (item.pet.id === pet.data.id) {
               return (
                 <div
                   key={index}
@@ -99,6 +100,7 @@ class Match extends React.Component {
 const mapStateToProps = state => {
   return {
     pet: state.pet,
+    pets: state.pets,
     auth: state.auth,
     match: state.match
   };

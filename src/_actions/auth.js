@@ -26,27 +26,6 @@ export const getAuth = () => {
   }
 };
 
-export const autoAuth = () => {
-  //AUTOAUTH
-  const token = localStorage.getItem("token");
-  if (token) {
-    return {
-      type: "AUTO_AUTH",
-      payload: {
-        id: 1,
-        token,
-        email: "test@gmail.com"
-      }
-    };
-  } else {
-    ////redirect to login page
-    console.log("LOGOUT XXXX");
-    return {
-      type: "LOGOUT",
-      payload: {}
-    };
-  }
-};
 
 export const login = data => {
   console.log("data action login", data);
@@ -89,3 +68,26 @@ export const logout = () => {
     payload: {}
   };
 };
+
+
+// export const autoAuth = () => {
+//   //AUTOAUTH
+//   const token = localStorage.getItem("token");
+//   if (token) {
+//     return {
+//       type: "AUTO_AUTH",
+//       payload: {
+//         id: 1,
+//         token,
+//         email: "test@gmail.com"
+//       }
+//     };
+//   } else {
+//     ////redirect to login page
+//     console.log("LOGOUT XXXX");
+//     return {
+//       type: "LOGOUT",
+//       payload: {}
+//     };
+//   }
+// };

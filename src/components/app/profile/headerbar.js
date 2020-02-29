@@ -38,7 +38,7 @@ class HeaderBar extends React.Component {
           className={classes.avatar}
           //   style={{ border: "2px solid #fff", marginRight: 10 }}
           alt="Remy Sharp"
-          src={this.props.pet.currentPet.photo}
+          src={this.props.pet.data.photo}
         />
         {/* <Typography variant="h6">Profile Pet</Typography> */}
         {/* <Typography variant="h6">

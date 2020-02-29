@@ -11,7 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 
 import { getUsers } from "./_actions/user";
-import { getPets } from "./_actions/pet";
+import { getPet } from "./_actions/pet";
+import { getPets } from "./_actions/pets";
 import { getMatch } from "./_actions/match";
 
 const styles = theme => ({
@@ -43,20 +44,19 @@ class Home extends React.Component {
   componentDidMount() {
     //console.log("id===========", this.props.auth.user.id);
     const { user } = this.props.auth;
+    console.log("masuk home did mounth");
     this.props.getUsers(user.id);
-    if (this.props.pet && this.props.pet.data.length == 0) {
-      this.props.getPets(user.id);
-    }
-
-    if (this.props.pet.data.length > 0) {
-    //  console.log("pet home current", this.props.pet.currentPet.id);
-      this.props.getMatch(this.props.pet.currentPet.id);
-    }
-    //const { pet } = this.props.pet;
+    this.props.getPets(user.id).then(res => {
+      if (!this.props.pet.data.id) {
+        console.log("sudah ada");
+        this.props.getPet(res.value[0].id);
+        this.props.getMatch(res.value[0].id);
+      }
+    });
   }
 
   render() {
-    const { classes, auth, pet, user, matched } = this.props;
+    const { classes, auth, pet, pets, user, matched } = this.props;
     console.log("xxxxxxxxxxx home", matched);
 
     return (
@@ -71,7 +71,7 @@ class Home extends React.Component {
             }}
           >
             <div className={classes.header}>
-              <HeaderBar pet={pet} />
+              <HeaderBar pet={pet} pets={pets} />
             </div>
             <br />
             <Typography
@@ -102,6 +102,7 @@ const mapStateToProps = state => {
     auth: state.auth,
     user: state.user,
     pet: state.pet,
+    pets: state.pets,
     matched: state.match
   };
 };
@@ -109,7 +110,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getUsers: id => dispatch(getUsers(id)),
-    getPets: user_id => dispatch(getPets(user_id)),
+    getPets: async user_id => dispatch(getPets(user_id)),
+    getPet: id => dispatch(getPet(id)),
     getMatch: pet_id => dispatch(getMatch(pet_id))
   };
 };

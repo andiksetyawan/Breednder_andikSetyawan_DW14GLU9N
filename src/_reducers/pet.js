@@ -2,7 +2,8 @@ import {
   GET_PET,
   ADD_PET,
   EDIT_PET,
-  SET_CURRENT_PET
+  SET_PET,
+  REMOVE_PET
 } from "../config/constants";
 
 const initState = {
@@ -23,10 +24,11 @@ const pet = (state = initState, action) => {
         error: null
       };
     case `${GET_PET}_FULFILLED`:
+    case `${ADD_PET}_FULFILLED`:
+    case `${EDIT_PET}_FULFILLED`:
       return {
         ...state,
         data: action.payload,
-        currentPet: action.payload[0],
         loading: false,
         error: null
       };
@@ -36,30 +38,21 @@ const pet = (state = initState, action) => {
       return {
         ...state,
         loading: false,
-        error: action.payload.response.data.message
+        error: action.payload.response.data.message || "Something error"
       };
-
-    case `${ADD_PET}_FULFILLED`:
-      return {
-        ...state,
-        data: [...state.data, action.payload],
-        // currentPet: action.payload,
-        loading: false,
-        error: null
-      };
-    case `${EDIT_PET}_FULFILLED`:
-      return {
-        ...state,
-        //data: [...state.data, action.payload],
-        currentPet: action.payload,
-        loading: false,
-        error: null
-      };
-    case `${SET_CURRENT_PET}`:
+    case `${SET_PET}`:
       console.log("masuk reducer SET_CURRENT_PET");
       return {
         ...state,
-        currentPet: action.payload,
+        data: action.payload,
+        loading: false,
+        error: null
+      };
+    case `${REMOVE_PET}`:
+      console.log("masuk reducer REMOVE_PET");
+      return {
+        ...state,
+        data: {},
         loading: false,
         error: null
       };
